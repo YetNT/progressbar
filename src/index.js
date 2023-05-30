@@ -11,14 +11,14 @@
  */
 const progressBar = (percentage, barAmount, emptyChars, fullChars, returnAr = false, firstEdgeOverride, lastEdgeOverride) => { // (Percent of the bar you want full (out of 100), Amount of units in the bar)
 
-  if (typeof percentage !== "number" || (typeof barAmount !== "number" && barAmount >= 100)) {
-    console.error("error")
+  if (percentage > 100 || percentage < 0) {
+    console.error(`percentage should be an integer between 0 and 100.`)
     return;
   }
 
-  var units = (percentage / 100) * barAmount // Amount of units that will be shaded (Do Not Edit)
+  var units = Math.floor((percentage / 100) * barAmount) // Amount of units that will be shaded (Do Not Edit)
   var bar = []
-  let empty = null, filled = null;
+  let empty = "", filled = "";
   
   for ( i = 0; i < barAmount; i++) {
 
