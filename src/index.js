@@ -53,7 +53,7 @@ const progressBar = (percentage, barWidth, emptyChars, fullChars, returnAr = fal
         bar.push(filled)
       }
     } else { // push the empty char
-      if (typeof firstEdgeOverride !== "undefined" && typeof lastEdgeOverride !== undefined) {
+      if (typeof firstEdgeOverride !== "undefined" && typeof lastEdgeOverride !== "undefined") {
         i == 0 ? bar.push(firstEdgeOverride[0]) : i == barWidth - 1 ? bar.push(lastEdgeOverride[0]) : bar.push(empty)
       } else {
         bar.push(empty)
