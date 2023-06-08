@@ -3,12 +3,12 @@ A progress bar creator in javascript!
 
 # Installation
 ```js
-npm i @yetnt/progressBar
+npm i @yetnt/progressbar
 ```
 
 # Usage
 ```js
-const { progressBar } = require('@yetnt/progressBar')
+const { progressBar } = require('@yetnt/progressbar')
 ```
 ## A Simple bar
 
