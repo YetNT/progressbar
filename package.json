@@ -1,25 +1,29 @@
 {
-  "name": "progressbar.js",
-  "version": "1.0.0",
-  "description": "An easy, simple and customizable string progress bar",
-  "main": "src/index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Yetity/progressBar.js.git"
-  },
-  "keywords": [
-    "progress",
-    "bar",
-    "easy",
-    "customizable"
-  ],
-  "author": "YetNT",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Yetity/progressBar.js/issues"
-  },
-  "homepage": "https://github.com/Yetity/progressBar.js#readme"
+    "name": "progressbar.js",
+    "version": "1.0.0",
+    "description": "An easy, simple and customizable string progress bar",
+    "main": "src/index.js",
+    "scripts": {
+        "test": "mocha ./src/index.test.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Yetity/progressBar.js.git"
+    },
+    "keywords": [
+        "progress",
+        "bar",
+        "easy",
+        "customizable"
+    ],
+    "author": "YetNT",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/Yetity/progressBar.js/issues"
+    },
+    "homepage": "https://github.com/Yetity/progressBar.js#readme",
+    "devDependencies": {
+        "expect.js": "^0.3.1",
+        "mocha": "^10.2.0"
+    }
 }
