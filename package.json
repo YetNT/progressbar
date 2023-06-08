@@ -1,5 +1,5 @@
 {
-    "name": "progressbar.js",
+    "name": "progressBar.js",
     "version": "1.0.0",
     "description": "An easy, simple and customizable string progress bar",
     "main": "src/index.js",
