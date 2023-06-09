@@ -21,42 +21,40 @@ const progressBar = (
     // (Percent of the bar you want full (out of 100), Amount of units in the bar)
     // checks
     if (
-        percentage > 100 ||
-        percentage < 0 ||
-        typeof percentage !== "number" ||
+        (percentage > 100 ||
+            percentage < 0 ||
+            typeof percentage !== "number") &&
         !Number.isInteger(percentage)
     ) {
-        console.error(
-            `percentage should be a valid integer/float between 0 and 100.`
-        );
         let out = ``;
         percentage > 100
             ? (out = `${percentage} > 100`)
             : percentage < 0
             ? (out = `${percentage} < 0`)
             : (out = `percentage is currently a ${typeof percentage}`);
-        console.error(out);
-        return;
+
+        throw Error(
+            `percentage should be a valid integer/float between 0 and 100.` +
+                "\n" +
+                out
+        );
     }
 
     if (typeof barWidth !== "number") {
-        console.error(`Barwidth should be a valid Int`);
-        return;
+        throw Error(`Barwidth should be a valid Int`);
     }
 
     if (typeof fullChars !== "string" || typeof emptyChars !== "string") {
-        console.error(
+        throw Error(
             `emptyChar (param 3) and fullChar (param 4) should be of type String`
         );
-        return;
     }
 
     if (
         firstEdgeOverride !== undefined &&
         firstEdgeOverride.length !== lastEdgeOverride.length
     ) {
-        console.error(`Overrides should only be 2 elements long.`);
-        return;
+        throw Error(`Overrides should only be 2 elements long.`);
     }
     // logic
     var units = Math.floor((percentage / 100) * barWidth); // Amount of units that will be shaded (Do Not Edit)
