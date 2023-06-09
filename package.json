@@ -1,6 +1,6 @@
 {
     "name": "@yetnt/progressbar",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "An easy, simple and customizable string progress bar",
     "main": "src/index.js",
     "scripts": {
