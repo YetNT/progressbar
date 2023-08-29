@@ -1,4 +1,4 @@
-const { progressBar, ProgressBar } = require("./index.js");
+const { progressBar, ProgressBar } = require("../dist/index");
 const expect = require("expect.js");
 
 describe("Progress Bar", function () {
