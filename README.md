@@ -1,6 +1,8 @@
-# progressbar.js
+# progressbar
 
-A progress bar creator in javascript!
+A progress bar creator in ~~javascript~~ typescript!
+
+NOTE: All examples and explanations are in javascript.
 
 # Installation
 
@@ -28,7 +30,7 @@ lastEdgeOverride = ["▷", "▶"] // (optional) Overrides the last edge with ele
 let bar = new ProgressBar(percentage, barWidth, emptyChars, fullChars, firstEdgeOverride?, lastEdgeOverride?)
 ```
 
-or if you don't want to deconstruct the function (for some reason)
+or if you don't want to deconstruct them (for some reason)
 
 ```js
 const pb = require("@yetnt/progressbar");
@@ -115,13 +117,14 @@ bar.bar;
 The main difference between the function and the class (apart from one being a class and the other a function), is that when you update the barWidth/percentage properties in the class, the bar also updates.
 
 ### Example
+
 ```js
 let bar = new ProgressBar(56, 30, "▢", "▧", ["◁", "◀"], ["▷", "▶"]);
-bar.bar // ◀▧▧▧▧▧▧▧▧▧▧▧▧▧▧▧▢▢▢▢▢▢▢▢▢▢▢▢▢▷
-bar.barWidth = 20
-bar.bar // ◀▧▧▧▧▧▧▧▧▧▧▢▢▢▢▢▢▢▢▷
-bar.percentage = 80
-bar.bar // ◀▧▧▧▧▧▧▧▧▧▧▧▧▧▧▧▢▢▢▷
+bar.bar; // ◀▧▧▧▧▧▧▧▧▧▧▧▧▧▧▧▢▢▢▢▢▢▢▢▢▢▢▢▢▷
+bar.barWidth = 20;
+bar.bar; // ◀▧▧▧▧▧▧▧▧▧▧▢▢▢▢▢▢▢▢▷
+bar.percentage = 80;
+bar.bar; // ◀▧▧▧▧▧▧▧▧▧▧▧▧▧▧▧▢▢▢▷
 ```
 
 Warning : Bar may not work properly if you edit any other properties that aren't meant to be edited.
