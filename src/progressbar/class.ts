@@ -1,24 +1,42 @@
 /**
- * @param {Integer} percentage How much of the progress bar should be filled. (A number between 1 and 100)
- * @param {Integer} barWidth How long should the bar be?
- * @param {String} emptyChars What should be displayed for parts of the bar that are empty.
- * @param {String} fullChars What should be displayed for parts of the bar that is filled.
- * @param {String[]} firstEdgeOverride Override first bar char with something else. Make sure it is similar to this ```["emptyChar", "fullChar"]```.
- * @param {String[]} lastEdgeOverride Override first bar char with something else. Make sure it is similar to this ```["emptyChar", "fullChar"]```.
- *
- * @returns Array or String when `returnAr` is specified
+ * @class ProgresBar
+ * @classdesc Editable string progress bar.
  */
 class ProgressBar {
-    constructor(
-        percentage,
-        barWidth,
-        emptyChars,
-        fullChars,
-        firstEdgeOverride,
-        lastEdgeOverride
-    ) {
-        // Constructor logic here...
+    _percentage: number;
+    _barWidth: number;
+    emptyChars: String;
+    fullChars: String;
+    firstEdgeOverride: String[];
+    lastEdgeOverride: String[];
 
+    /**
+     * Progress bar in it's string form.
+     */
+    bar: String;
+
+    /**
+     * Progress bar in it's array form
+     */
+    barArray: String[];
+
+    /**
+     * @param {Integer} percentage How much of the progress bar should be filled. (A number between 1 and 100)
+     * @param {Integer} barWidth How long should the bar be?
+     * @param {String} emptyChars What should be displayed for parts of the bar that are empty.
+     * @param {String} fullChars What should be displayed for parts of the bar that is filled.
+     * @param {String[]} firstEdgeOverride Override first bar char with something else. Make sure it is similar to this ```["emptyChar", "fullChar"]```.
+     * @param {String[]} lastEdgeOverride Override first bar char with something else. Make sure it is similar to this ```["emptyChar", "fullChar"]```.
+     *
+     */
+    constructor(
+        percentage: number,
+        barWidth: number,
+        emptyChars: String,
+        fullChars: String,
+        firstEdgeOverride: String[],
+        lastEdgeOverride: String[]
+    ) {
         // (Percent of the bar you want full (out of 100), Amount of units in the bar)
         // checks
         if (
@@ -27,7 +45,7 @@ class ProgressBar {
                 typeof percentage !== "number") &&
             !Number.isInteger(percentage)
         ) {
-            let out = ``;
+            let out: String = ``;
             percentage > 100
                 ? (out = `${percentage} > 100`)
                 : percentage < 0
@@ -68,12 +86,17 @@ class ProgressBar {
         this.updateBar();
     }
 
+    /**
+     * Update the bar
+     */
     updateBar() {
         // logic
-        var units = Math.floor((this._percentage / 100) * this._barWidth); // Amount of units that will be shaded (Do Not Edit)
-        var bar = [];
-        let empty = "",
-            filled = "";
+        var units: number = Math.floor(
+            (this._percentage / 100) * this._barWidth
+        ); // Amount of units that will be shaded (Do Not Edit)
+        var bar: String[] = [];
+        let empty: String = "",
+            filled: String = "";
 
         for (let i = 0; i < this._barWidth; i++) {
             if (this.emptyChars == undefined && this.fullChars == undefined) {
@@ -117,9 +140,6 @@ class ProgressBar {
         this.barArray = bar;
     }
 
-    /**
-     * @param {number} percentage
-     */
     set percentage(percentage) {
         if (
             (percentage > 100 ||
@@ -127,7 +147,7 @@ class ProgressBar {
                 typeof percentage !== "number") &&
             !Number.isInteger(percentage)
         ) {
-            let out = ``;
+            let out: String = ``;
             percentage > 100
                 ? (out = `${percentage} > 100`)
                 : percentage < 0
@@ -164,4 +184,4 @@ class ProgressBar {
     }
 }
 
-module.exports = ProgressBar;
+export { ProgressBar };

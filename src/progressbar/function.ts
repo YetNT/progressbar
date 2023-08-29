@@ -9,15 +9,15 @@
  *
  * @returns Array or String when `returnAr` is specified
  */
-module.exports = (
-    percentage,
-    barWidth,
-    emptyChars,
-    fullChars,
-    returnAr = false,
-    firstEdgeOverride,
-    lastEdgeOverride
-) => {
+function progressBar(
+    percentage: number,
+    barWidth: number,
+    emptyChars: String,
+    fullChars: String,
+    returnAr?: boolean,
+    firstEdgeOverride?: String[],
+    lastEdgeOverride?: String[]
+): String | String[] {
     // (Percent of the bar you want full (out of 100), Amount of units in the bar)
     // checks
     if (
@@ -26,7 +26,7 @@ module.exports = (
             typeof percentage !== "number") &&
         !Number.isInteger(percentage)
     ) {
-        let out = ``;
+        let out: String = ``;
         percentage > 100
             ? (out = `${percentage} > 100`)
             : percentage < 0
@@ -56,13 +56,15 @@ module.exports = (
     ) {
         throw Error(`Overrides should only be 2 elements long.`);
     }
-    // logic
-    var units = Math.floor((percentage / 100) * barWidth); // Amount of units that will be shaded (Do Not Edit)
-    var bar = [];
-    let empty = "",
-        filled = "";
 
-    for (i = 0; i < barWidth; i++) {
+    returnAr == undefined ? false : true; // this should make it false if undefined but ye
+    // logic
+    var units: number = Math.floor((percentage / 100) * barWidth); // Amount of units that will be shaded (Do Not Edit)
+    var bar: String[] = [];
+    let empty: String = "",
+        filled: String = "";
+
+    for (let i = 0; i < barWidth; i++) {
         if (emptyChars == undefined && fullChars == undefined) {
             (empty = "empty"), (filled = "filled");
         } else {
@@ -106,3 +108,5 @@ module.exports = (
         return bar.join("");
     }
 }
+
+export { progressBar };
