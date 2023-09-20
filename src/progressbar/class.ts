@@ -34,8 +34,8 @@ class ProgressBar {
         barWidth: number,
         emptyChars: String,
         fullChars: String,
-        firstEdgeOverride: String[],
-        lastEdgeOverride: String[]
+        firstEdgeOverride?: String[],
+        lastEdgeOverride?: String[]
     ) {
         // (Percent of the bar you want full (out of 100), Amount of units in the bar)
         // checks

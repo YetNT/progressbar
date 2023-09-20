@@ -1,2 +1,2 @@
-export { ProgressBar } from "./progressbar/class";
-export { progressBar } from "./progressbar/function";
+export * from "./progressbar/class";
+export * from "./progressbar/function";
