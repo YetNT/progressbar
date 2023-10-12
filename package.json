@@ -19,7 +19,16 @@
         "progress",
         "bar",
         "easy",
-        "customizable"
+        "customizable",
+        "string",
+        "discord.js",
+        "discord",
+        "eris",
+        "progress bar",
+        "progressbar",
+        "aoi.js",
+        "status",
+        "statusbar"
     ],
     "author": "YetNT",
     "license": "MIT",
