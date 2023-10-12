@@ -9,6 +9,14 @@ class ProgressBar {
     fullChars: String;
     firstEdgeOverride: String[];
     lastEdgeOverride: String[];
+    split: {
+        isCharSplit: boolean;
+        char: String;
+    } = {
+        isCharSplit: false,
+        char: "",
+    };
+    units: number;
 
     /**
      * Progress bar in it's string form.
@@ -94,6 +102,7 @@ class ProgressBar {
         var units: number = Math.floor(
             (this._percentage / 100) * this._barWidth
         ); // Amount of units that will be shaded (Do Not Edit)
+        this.units = units;
         var bar: String[] = [];
         let empty: String = "",
             filled: String = "";
@@ -136,8 +145,34 @@ class ProgressBar {
             }
         }
 
+        if (this.split.isCharSplit) {
+            // there is no use showing the split if there is an edge override and its 100%
+            this.charSplit(this.split.char);
+        }
+
         this.bar = bar.join("");
         this.barArray = bar;
+    }
+
+    /**
+     *
+     * @param char Change the last filled character to something else. Has no effect if percentage is 100% and there is edge overrides.
+     */
+    charSplit(char: String): void {
+        if (
+            typeof this.lastEdgeOverride !== "undefined" &&
+            this.percentage == 100
+        )
+            return;
+
+        if (!this.split.isCharSplit) {
+            this.split.isCharSplit = true;
+            this.split.char = char;
+        }
+        if (char !== this.split.char) this.split.char = char;
+
+        this.barArray[this.units - 1] = char;
+        this.bar = this.barArray.join("");
     }
 
     set percentage(percentage) {

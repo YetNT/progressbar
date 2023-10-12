@@ -49,5 +49,15 @@ describe("Progress Bar", function () {
             bar.barWidth = 20;
             expect(bar.bar).to.eql("eeeeeeeeeeffffffffff");
         });
+        it("should split the char with a split of '6'", function () {
+            bar.charSplit("6");
+            expect(bar.bar).to.eql("eeeeeeeee6ffffffffff");
+        });
+
+        let bar2 = new ProgressBar(100, 4, "e", "f", ["<", "<"], [">", ">"]);
+        it("should NOT split with the char, since there is a lastEdgeOverride and bar is 100%", function () {
+            bar2.charSplit("null");
+            expect(bar2.bar).to.eql("<ff>");
+        });
     });
 });

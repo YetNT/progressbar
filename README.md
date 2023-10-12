@@ -10,6 +10,11 @@ NOTE: All examples and explanations are in javascript.
 npm i @yetnt/progressbar
 ```
 
+## (Jump To)
+
+-   [A Simple Bar](#a-simple-bar)
+-   [Seperated Bar](#seprated-bar-charsplit-method)
+
 # Usage (examples below this)
 
 ```js
@@ -114,9 +119,9 @@ bar.bar;
 
 ## Differences
 
-The main difference between the function and the class (apart from one being a class and the other a function), is that when you update the barWidth/percentage properties in the class, the bar also updates.
+### Dynamic Bar
 
-### Example
+Unlike the [function](#function), If you update the `percentage` or `barWidth` property of the ProgessBar object, the bar updates.
 
 ```js
 let bar = new ProgressBar(56, 30, "▢", "▧", ["◁", "◀"], ["▷", "▶"]);
@@ -129,7 +134,28 @@ bar.bar; // ◀▧▧▧▧▧▧▧▧▧▧▧▧▧▧▧▢▢▢▷
 
 Warning : Bar may not work properly if you edit any other properties that aren't meant to be edited.
 
+### Seprated Bar (charsplit method)
+
+To seprate a bar with some value (Replace the last filled char), you can use the `charSplit()` method.
+
+```js
+let bar = new ProgressBar(56, 30, "▢", "▧");
+bar.bar; // ▧▧▧▧▧▧▧▧▧▧▧▧▧▧▧▧▢▢▢▢▢▢▢▢▢▢▢▢▢▢
+bar.charSplit("▶");
+bar.bar; // ▧▧▧▧▧▧▧▧▧▧▧▧▧▧▧▶▢▢▢▢▢▢▢▢▢▢▢▢▢▢
+```
+
+The bar will NOT charSplit if :
+
+> 1. [Last Edge Override](#edge-overrides) is provided
+>
+>     AND
+>
+> 2. Bar's percentage is 100%
+
 # Links
+
+[NPM](https://www.npmjs.com/package/@yetnt/progressbar, "takes you to node package manager registery")
 
 [Math on a progress bar](https://stackoverflow.com/a/40323549/16618019, "Takes you to stackoverflow")
 
