@@ -7,13 +7,16 @@ NOTE: All examples and explanations are in javascript.
 # Installation
 
 ```bash
-npm i @yetnt/progressbar
+npm install @yetnt/progressbar
+sudo npm install @yetnt/progressbar
+yarn add @yetnt/progressbar
 ```
 
 ## (Jump To)
 
 -   [A Simple Bar](#a-simple-bar)
 -   [Seperated Bar](#seprated-bar-charsplit-method)
+-   [Discord.js Example](#discordjs-example)
 
 # Usage (examples below this)
 
@@ -116,6 +119,26 @@ bar.bar;
 ```js
 "◀▧▧▧▧▧▧▧▧▧▧▧▧▧▧▧▢▢▢▢▢▢▢▢▢▢▢▢▢▷";
 ```
+## Discord.js example
+__Code might need to be modified depending on your command handler, if you are using [Under Ctrl's Command Handler](https://youtu.be/JEEcbVjLyr0) it should work perfectly!__
+```js
+const { ProgressBar, progressBar } = require("@yetnt/progressbar") // deconstructing
+module.exports = {
+    name: "progressbar",
+    description: "usefull npm package made by yet",
+    callback: async (client, interaction) => {
+        const progressBar = new ProgressBar(55,10,"▢","▧")
+
+        interaction.reply({
+            content: progressBar.bar,
+            ephemeral: true
+        })
+    }
+}
+```
+### Output
+<img src="/imgs/dbe.png">
+
 
 ## Differences
 
@@ -152,6 +175,7 @@ The bar will NOT charSplit if :
 >     AND
 >
 > 2. Bar's percentage is 100%
+
 
 # Links
 
