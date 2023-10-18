@@ -1,4 +1,4 @@
-<img src="imgs/progress-bar-logo1.svg">
+# progressbar
 
 A progress bar creator in ~~javascript~~ typescript!
 
@@ -119,7 +119,7 @@ bar.bar;
 ```js
 "◀▧▧▧▧▧▧▧▧▧▧▧▧▧▧▧▢▢▢▢▢▢▢▢▢▢▢▢▢▷";
 ```
-# Discord.js example
+## Discord.js example
 __Code might need to be modified depending on your command handler, if you are using [Under Ctrl's Command Handler](https://youtu.be/JEEcbVjLyr0) it should work perfectly!__
 ```js
 const { ProgressBar, progressBar } = require("@yetnt/progressbar") // deconstructing
