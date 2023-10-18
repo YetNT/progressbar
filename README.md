@@ -157,7 +157,7 @@ The bar will NOT charSplit if :
 > 2. Bar's percentage is 100%
 
 # Discord.js example
-__Code might not work, it depends on your command handler__
+__Code might need to be modified depending on your command handler, if you are using [Under Ctrl's Command Handler](https://youtu.be/JEEcbVjLyr0) it should work perfectly!__
 ```js
 const { ProgressBar, progressBar } = require("@yetnt/progressbar") // deconstructing
 module.exports = {
