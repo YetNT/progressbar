@@ -16,6 +16,7 @@ yarn add @yetnt/progressbar
 
 -   [A Simple Bar](#a-simple-bar)
 -   [Seperated Bar](#seprated-bar-charsplit-method)
+-   [Discord.js Example](#discord.js-example)
 
 # Usage (examples below this)
 
@@ -154,6 +155,24 @@ The bar will NOT charSplit if :
 >     AND
 >
 > 2. Bar's percentage is 100%
+
+# Discord.js example
+__Code might not work, it depends on your command handler__
+```js
+const { ProgressBar, progressBar } = require("@yetnt/progressbar") // deconstructing
+module.exports = {
+    name: "progressbar",
+    description: "usefull npm package made by yet",
+    callback: async (client, interaction) => {
+        const progressBar = new ProgressBar(55,10,"▢","▧")
+
+        interaction.reply({
+            content: progressBar.bar,
+            ephemeral: true
+        })
+    }
+}
+```
 
 # Links
 
