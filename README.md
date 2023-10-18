@@ -16,7 +16,7 @@ yarn add @yetnt/progressbar
 
 -   [A Simple Bar](#a-simple-bar)
 -   [Seperated Bar](#seprated-bar-charsplit-method)
--   [Discord.js Example](#discord.js-example)
+-   [Discord.js Example](#discordjs-example)
 
 # Usage (examples below this)
 
