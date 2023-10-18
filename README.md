@@ -9,7 +9,9 @@ NOTE: All examples and explanations are in javascript.
 # Installation
 
 ```bash
-npm i @yetnt/progressbar
+npm install @yetnt/progressbar
+sudo npm install @yetnt/progressbar
+yarn add @yetnt/progressbar
 ```
 
 ## (Jump To)
