@@ -173,6 +173,8 @@ module.exports = {
     }
 }
 ```
+# Output
+<img src="/imgs/dbe.png">
 
 # Links
 
