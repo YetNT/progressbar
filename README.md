@@ -1,6 +1,4 @@
 <img src="progress-bar-logo1.svg">
-# progressbar
-
 
 A progress bar creator in ~~javascript~~ typescript!
 
@@ -8,7 +6,7 @@ NOTE: All examples and explanations are in javascript.
 
 # Installation
 
-```js
+```bash
 npm install @yetnt/progressbar
 sudo npm install @yetnt/progressbar
 yarn add @yetnt/progressbar
