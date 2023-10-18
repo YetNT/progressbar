@@ -8,8 +8,6 @@ NOTE: All examples and explanations are in javascript.
 
 ```bash
 npm install @yetnt/progressbar
-sudo npm install @yetnt/progressbar
-yarn add @yetnt/progressbar
 ```
 
 ## (Jump To)
