@@ -1,5 +1,7 @@
-# progressbar
 <img src="progress-bar-logo1.svg">
+# progressbar
+
+
 A progress bar creator in ~~javascript~~ typescript!
 
 NOTE: All examples and explanations are in javascript.
