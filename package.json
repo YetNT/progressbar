@@ -40,6 +40,12 @@
         "baileys"
     ],
     "author": "YetNT",
+    "contributors": [
+        {
+            "name": "FloShutUp",
+            "url": "https://devflo.pages.dev"
+        }
+    ],
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/YetNT/progressbar/issues"
