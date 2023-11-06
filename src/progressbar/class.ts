@@ -11,7 +11,7 @@ class ProgressBar {
     private _fullChar: String;
     private _firstEdgeOverride: String[];
     private _lastEdgeOverride: String[];
-    split: {
+    private _split: {
         isCharSplit: boolean;
         char: String;
     } = {
@@ -148,9 +148,9 @@ class ProgressBar {
             }
         }
 
-        if (this.split.isCharSplit) {
+        if (this._split.isCharSplit) {
             // there is no use showing the split if there is an edge override and its 100%
-            this.charSplit(this.split.char);
+            this.charSplit(this._split.char);
         }
 
         this.bar = bar.join("");
@@ -168,11 +168,11 @@ class ProgressBar {
         )
             return;
 
-        if (!this.split.isCharSplit) {
-            this.split.isCharSplit = true;
-            this.split.char = char;
+        if (!this._split.isCharSplit) {
+            this._split.isCharSplit = true;
+            this._split.char = char;
         }
-        if (char !== this.split.char) this.split.char = char;
+        if (char !== this._split.char) this._split.char = char;
 
         this.barArray[this._units - 1] = char;
         this.bar = this.barArray.join("");
@@ -201,6 +201,9 @@ class ProgressBar {
         this._percentage = percentage;
         this.updateBar();
     }
+    /**
+     * How much of the progress bar is filled. (A number between 1 and 100)
+     */
     get percentage() {
         return this._percentage;
     }
@@ -212,6 +215,9 @@ class ProgressBar {
         this._barWidth = barWidth;
         this.updateBar();
     }
+    /**
+     * How many characters the bar is in total.
+     */
     get barWidth() {
         return this._barWidth;
     }
@@ -223,6 +229,9 @@ class ProgressBar {
         this._emptyChar = emptyChar;
         this.updateBar();
     }
+    /**
+     * Character displayed for parts of the bar that are empty.
+     */
     get emptyChar() {
         return this._emptyChar;
     }
@@ -234,6 +243,9 @@ class ProgressBar {
         this._fullChar = fullChar;
         this.updateBar();
     }
+    /**
+     * Character displayed for parts of the bar that are full.
+     */
     get fullChar() {
         return this._fullChar;
     }
@@ -248,6 +260,9 @@ class ProgressBar {
 
         this.updateBar();
     }
+    /**
+     * Override first bar char with something else. Make sure it is similar to this ```["emptyChar", "fullChar"]```. To reset, insert an empty array `[]`
+     */
     get firstEdgeOverride() {
         return this._firstEdgeOverride;
     }
@@ -262,6 +277,9 @@ class ProgressBar {
 
         this.updateBar();
     }
+    /**
+     * Override last bar char with something else. Make sure it is similar to this ```["emptyChar", "fullChar"]```. To reset, insert an empty array `[]`
+     */
     get lastEdgeOverride() {
         return this._lastEdgeOverride;
     }
