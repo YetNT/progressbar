@@ -23,19 +23,19 @@ yarn add @yetnt/progressbar
 ```js
 const { progressBar, ProgressBar } = require('@yetnt/progressbar')
 
-progressBar(percentage, barWidth, emptyChars, fullChars, returnAr?, firstEdgeOverride?, lastEdgeOverride?)
+progressBar(percentage, barWidth, emptyChar, fullChar, returnAr?, firstEdgeOverride?, lastEdgeOverride?)
 
 percentage = 45 // How much of the bar is full. If 100% the whole thing is full. If 0 everything is empty.
 barWidth = 10 // Width of the bar. If 10 it's 10 characters long
-emptyChars = "□" // Empty character to display for parts of the bar that aren't filled.
-fullChars = "■" // Full character to display for parts of the bar that  are filled.
+emptyChar = "□" // Empty character to display for parts of the bar that aren't filled.
+fullChar = "■" // Full character to display for parts of the bar that  are filled.
 returnAr = false // (optional) Return an array or not
 firstEdgeOverride = ["◁", "◀"] // (optional) Overrides the first edge with the elements
 lastEdgeOverride = ["▷", "▶"] // (optional) Overrides the last edge with elements
 
 // This is exactly the same for class, but returnAr is not a parameter
 
-let bar = new ProgressBar(percentage, barWidth, emptyChars, fullChars, firstEdgeOverride?, lastEdgeOverride?)
+let bar = new ProgressBar(percentage, barWidth, emptyChar, fullChar, firstEdgeOverride?, lastEdgeOverride?)
 ```
 
 or if you don't want to deconstruct them (for some reason)
@@ -119,43 +119,54 @@ bar.bar;
 ```js
 "◀▧▧▧▧▧▧▧▧▧▧▧▧▧▧▧▢▢▢▢▢▢▢▢▢▢▢▢▢▷";
 ```
+
 ## Discord.js example
-__Code might need to be modified depending on your command handler, if you are using [Under Ctrl's Command Handler](https://youtu.be/JEEcbVjLyr0) it should work perfectly!__
+
+**Code may need to be modified depending on your command handler, currently setup using [ic4d Command Handler](https://github.com/YetNT/ic4d)/[(Under Ctrl's Command Handler)](https://youtu.be/JEEcbVjLyr0)**
+
 ```js
-const { ProgressBar, progressBar } = require("@yetnt/progressbar") // deconstructing
+const { ProgressBar, progressBar } = require("@yetnt/progressbar"); // deconstructing
 module.exports = {
     name: "progressbar",
-    description: "usefull npm package made by yet",
+    description: "useful npm package made by yet",
     callback: async (client, interaction) => {
-        const progressBar = new ProgressBar(55,10,"▢","▧")
+        const progressBar = new ProgressBar(55, 10, "▢", "▧");
 
         interaction.reply({
             content: progressBar.bar,
-            ephemeral: true
-        })
-    }
-}
+            ephemeral: true,
+        });
+    },
+};
 ```
-### Output
-<img src="/imgs/dbe.png">
 
+### Output
+
+<img src="dbe.png">
 
 ## Differences
 
 ### Dynamic Bar
 
-Unlike the [function](#function), If you update the `percentage` or `barWidth` property of the ProgessBar object, the bar updates.
+Unlike the [function](#function), If you update any one of the properties of the ProgessBar object, the bar updates.
 
 ```js
 let bar = new ProgressBar(56, 30, "▢", "▧", ["◁", "◀"], ["▷", "▶"]);
+
 bar.bar; // ◀▧▧▧▧▧▧▧▧▧▧▧▧▧▧▧▢▢▢▢▢▢▢▢▢▢▢▢▢▷
+
 bar.barWidth = 20;
 bar.bar; // ◀▧▧▧▧▧▧▧▧▧▧▢▢▢▢▢▢▢▢▷
+
 bar.percentage = 80;
 bar.bar; // ◀▧▧▧▧▧▧▧▧▧▧▧▧▧▧▧▢▢▢▷
+
+bar.firstEdgeOverride = [];
+bar.lastEdgeOberride = [];
+bar.bar; // ▧▧▧▧▧▧▧▧▧▧▧▧▧▧▧▧▢▢▢▢ (Removes Edge Overrides)
 ```
 
-Warning : Bar may not work properly if you edit any other properties that aren't meant to be edited.
+Warning : Bar may not work properly if you edit any other properties that aren't meant to be edited. (these tend to be properties with an \_)
 
 ### Seprated Bar (charsplit method)
 
@@ -175,7 +186,6 @@ The bar will NOT charSplit if :
 >     AND
 >
 > 2. Bar's percentage is 100%
-
 
 # Links
 
