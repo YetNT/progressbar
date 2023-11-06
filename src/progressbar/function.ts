@@ -1,8 +1,8 @@
 /**
  * @param {Integer} percentage How much of the progress bar should be filled. (A number between 1 and 100)
  * @param {Integer} barWidth How long should the bar be?
- * @param {String} emptyChars What should be displayed for parts of the bar that are empty.
- * @param {String} fullChars What should be displayed for parts of the bar that is filled.
+ * @param {String} emptyChar What should be displayed for parts of the bar that are empty.
+ * @param {String} fullChar What should be displayed for parts of the bar that is filled.
  * @param {Boolean} returnAr Return an array in stead of a string
  * @param {String[]} firstEdgeOverride Override first bar char with something else. Make sure it is similar to this ```["emptyChar", "fullChar"]```.
  * @param {String[]} lastEdgeOverride Override first bar char with something else. Make sure it is similar to this ```["emptyChar", "fullChar"]```.
@@ -12,8 +12,8 @@
 function progressBar(
     percentage: number,
     barWidth: number,
-    emptyChars: String,
-    fullChars: String,
+    emptyChar: String,
+    fullChar: String,
     returnAr?: boolean,
     firstEdgeOverride?: String[],
     lastEdgeOverride?: String[]
@@ -44,7 +44,7 @@ function progressBar(
         throw Error(`Barwidth should be a valid Int`);
     }
 
-    if (typeof fullChars !== "string" || typeof emptyChars !== "string") {
+    if (typeof fullChar !== "string" || typeof emptyChar !== "string") {
         throw Error(
             `emptyChar (param 3) and fullChar (param 4) should be of type String`
         );
@@ -65,10 +65,10 @@ function progressBar(
         filled: String = "";
 
     for (let i = 0; i < barWidth; i++) {
-        if (emptyChars == undefined && fullChars == undefined) {
+        if (emptyChar == undefined && fullChar == undefined) {
             (empty = "empty"), (filled = "filled");
         } else {
-            (empty = emptyChars), (filled = fullChars);
+            (empty = emptyChar), (filled = fullChar);
         }
 
         if (i < units) {
