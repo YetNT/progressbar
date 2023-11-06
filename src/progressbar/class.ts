@@ -89,8 +89,10 @@ class ProgressBar {
         this._barWidth = barWidth;
         this._emptyChar = emptyChar;
         this._fullChar = fullChar;
-        this._firstEdgeOverride = firstEdgeOverride;
-        this._lastEdgeOverride = lastEdgeOverride;
+        this._firstEdgeOverride =
+            firstEdgeOverride === undefined ? [] : firstEdgeOverride;
+        this._lastEdgeOverride =
+            lastEdgeOverride === undefined ? [] : lastEdgeOverride;
 
         this.updateBar();
     }
@@ -118,10 +120,8 @@ class ProgressBar {
             if (i < units) {
                 // push the filled char
                 if (
-                    (typeof this._firstEdgeOverride !== "undefined" &&
-                        typeof this._lastEdgeOverride !== "undefined") ||
-                    (this._firstEdgeOverride.length !== 0 &&
-                        this._lastEdgeOverride.length !== 0)
+                    this._firstEdgeOverride.length !== 0 &&
+                    this._lastEdgeOverride.length !== 0
                 ) {
                     i == 0
                         ? bar.push(this._firstEdgeOverride[1])
@@ -134,10 +134,8 @@ class ProgressBar {
             } else {
                 // push the empty char
                 if (
-                    (typeof this._firstEdgeOverride !== "undefined" &&
-                        typeof this._lastEdgeOverride !== "undefined") ||
-                    (this._firstEdgeOverride.length !== 0 &&
-                        this._lastEdgeOverride.length !== 0)
+                    this._firstEdgeOverride.length !== 0 &&
+                    this._lastEdgeOverride.length !== 0
                 ) {
                     i == 0
                         ? bar.push(this._firstEdgeOverride[0])
@@ -241,7 +239,7 @@ class ProgressBar {
     }
 
     set firstEdgeOverride(firstEdgeOverride) {
-        if (firstEdgeOverride !== undefined && firstEdgeOverride.length !== 2) {
+        if (firstEdgeOverride.length > 2) {
             throw new RangeError(`Overrides should only be 2 elements long.`);
         }
 
@@ -255,7 +253,7 @@ class ProgressBar {
     }
 
     set lastEdgeOverride(lastEdgeOverride) {
-        if (lastEdgeOverride !== undefined && lastEdgeOverride.length !== 2) {
+        if (lastEdgeOverride.length > 2) {
             throw new RangeError(`Overrides should only be 2 elements long.`);
         }
 
