@@ -3,12 +3,14 @@
  * @classdesc Editable string progress bar.
  */
 class ProgressBar {
-    _percentage: number;
-    _barWidth: number;
-    emptyChars: String;
-    fullChars: String;
-    firstEdgeOverride: String[];
-    lastEdgeOverride: String[];
+    private _units: number;
+
+    private _percentage: number;
+    private _barWidth: number;
+    private _emptyChar: String;
+    private _fullChar: String;
+    private _firstEdgeOverride: String[];
+    private _lastEdgeOverride: String[];
     split: {
         isCharSplit: boolean;
         char: String;
@@ -16,7 +18,6 @@ class ProgressBar {
         isCharSplit: false,
         char: "",
     };
-    units: number;
 
     /**
      * Progress bar in it's string form.
@@ -31,8 +32,8 @@ class ProgressBar {
     /**
      * @param {Integer} percentage How much of the progress bar should be filled. (A number between 1 and 100)
      * @param {Integer} barWidth How long should the bar be?
-     * @param {String} emptyChars What should be displayed for parts of the bar that are empty.
-     * @param {String} fullChars What should be displayed for parts of the bar that is filled.
+     * @param {String} emptyChar What should be displayed for parts of the bar that are empty.
+     * @param {String} fullChar What should be displayed for parts of the bar that is filled.
      * @param {String[]} firstEdgeOverride Override first bar char with something else. Make sure it is similar to this ```["emptyChar", "fullChar"]```.
      * @param {String[]} lastEdgeOverride Override first bar char with something else. Make sure it is similar to this ```["emptyChar", "fullChar"]```.
      *
@@ -40,8 +41,8 @@ class ProgressBar {
     constructor(
         percentage: number,
         barWidth: number,
-        emptyChars: String,
-        fullChars: String,
+        emptyChar: String,
+        fullChar: String,
         firstEdgeOverride?: String[],
         lastEdgeOverride?: String[]
     ) {
@@ -71,7 +72,7 @@ class ProgressBar {
             throw new TypeError(`Barwidth should be a valid Int`);
         }
 
-        if (typeof fullChars !== "string" || typeof emptyChars !== "string") {
+        if (typeof fullChar !== "string" || typeof emptyChar !== "string") {
             throw new TypeError(
                 `emptyChar (param 3) and fullChar (param 4) should be of type String`
             );
@@ -81,15 +82,15 @@ class ProgressBar {
             firstEdgeOverride !== undefined &&
             firstEdgeOverride.length !== lastEdgeOverride.length
         ) {
-            throw new TypeError(`Overrides should only be 2 elements long.`);
+            throw new RangeError(`Overrides should only be 2 elements long.`);
         }
 
         this._percentage = percentage;
         this._barWidth = barWidth;
-        this.emptyChars = emptyChars;
-        this.fullChars = fullChars;
-        this.firstEdgeOverride = firstEdgeOverride;
-        this.lastEdgeOverride = lastEdgeOverride;
+        this._emptyChar = emptyChar;
+        this._fullChar = fullChar;
+        this._firstEdgeOverride = firstEdgeOverride;
+        this._lastEdgeOverride = lastEdgeOverride;
 
         this.updateBar();
     }
@@ -102,28 +103,30 @@ class ProgressBar {
         var units: number = Math.floor(
             (this._percentage / 100) * this._barWidth
         ); // Amount of units that will be shaded (Do Not Edit)
-        this.units = units;
+        this._units = units;
         var bar: String[] = [];
         let empty: String = "",
             filled: String = "";
 
         for (let i = 0; i < this._barWidth; i++) {
-            if (this.emptyChars == undefined && this.fullChars == undefined) {
+            if (this._emptyChar == undefined && this._fullChar == undefined) {
                 (empty = "empty"), (filled = "filled");
             } else {
-                (empty = this.emptyChars), (filled = this.fullChars);
+                (empty = this._emptyChar), (filled = this._fullChar);
             }
 
             if (i < units) {
                 // push the filled char
                 if (
-                    typeof this.firstEdgeOverride !== "undefined" &&
-                    typeof this.lastEdgeOverride !== "undefined"
+                    (typeof this._firstEdgeOverride !== "undefined" &&
+                        typeof this._lastEdgeOverride !== "undefined") ||
+                    (this._firstEdgeOverride.length !== 0 &&
+                        this._lastEdgeOverride.length !== 0)
                 ) {
                     i == 0
-                        ? bar.push(this.firstEdgeOverride[1])
+                        ? bar.push(this._firstEdgeOverride[1])
                         : i == this._barWidth - 1
-                        ? bar.push(this.lastEdgeOverride[1])
+                        ? bar.push(this._lastEdgeOverride[1])
                         : bar.push(filled);
                 } else {
                     bar.push(filled);
@@ -131,13 +134,15 @@ class ProgressBar {
             } else {
                 // push the empty char
                 if (
-                    typeof this.firstEdgeOverride !== "undefined" &&
-                    typeof this.lastEdgeOverride !== "undefined"
+                    (typeof this._firstEdgeOverride !== "undefined" &&
+                        typeof this._lastEdgeOverride !== "undefined") ||
+                    (this._firstEdgeOverride.length !== 0 &&
+                        this._lastEdgeOverride.length !== 0)
                 ) {
                     i == 0
-                        ? bar.push(this.firstEdgeOverride[0])
+                        ? bar.push(this._firstEdgeOverride[0])
                         : i == this._barWidth - 1
-                        ? bar.push(this.lastEdgeOverride[0])
+                        ? bar.push(this._lastEdgeOverride[0])
                         : bar.push(empty);
                 } else {
                     bar.push(empty);
@@ -160,7 +165,7 @@ class ProgressBar {
      */
     charSplit(char: String): void {
         if (
-            typeof this.lastEdgeOverride !== "undefined" &&
+            typeof this._lastEdgeOverride !== "undefined" &&
             this.percentage == 100
         )
             return;
@@ -171,7 +176,7 @@ class ProgressBar {
         }
         if (char !== this.split.char) this.split.char = char;
 
-        this.barArray[this.units - 1] = char;
+        this.barArray[this._units - 1] = char;
         this.bar = this.barArray.join("");
     }
 
@@ -198,14 +203,10 @@ class ProgressBar {
         this._percentage = percentage;
         this.updateBar();
     }
-
     get percentage() {
         return this._percentage;
     }
 
-    /**
-     * @param {number} barWidth
-     */
     set barWidth(barWidth) {
         if (typeof barWidth !== "number") {
             throw new TypeError(`Barwidth should be a valid Int`);
@@ -213,9 +214,58 @@ class ProgressBar {
         this._barWidth = barWidth;
         this.updateBar();
     }
-
     get barWidth() {
         return this._barWidth;
+    }
+
+    set emptyChar(emptyChar) {
+        if (typeof emptyChar !== "string") {
+            throw new TypeError(`emptyChar should be of type String`);
+        }
+        this._emptyChar = emptyChar;
+        this.updateBar();
+    }
+    get emptyChar() {
+        return this._emptyChar;
+    }
+
+    set fullChar(fullChar) {
+        if (typeof fullChar !== "string") {
+            throw new TypeError(`fullChar should be of type String`);
+        }
+        this._fullChar = fullChar;
+        this.updateBar();
+    }
+    get fullChar() {
+        return this._fullChar;
+    }
+
+    set firstEdgeOverride(firstEdgeOverride) {
+        if (firstEdgeOverride !== undefined && firstEdgeOverride.length !== 2) {
+            throw new RangeError(`Overrides should only be 2 elements long.`);
+        }
+
+        this._firstEdgeOverride =
+            firstEdgeOverride.length == 0 ? [] : firstEdgeOverride;
+
+        this.updateBar();
+    }
+    get firstEdgeOverride() {
+        return this._firstEdgeOverride;
+    }
+
+    set lastEdgeOverride(lastEdgeOverride) {
+        if (lastEdgeOverride !== undefined && lastEdgeOverride.length !== 2) {
+            throw new RangeError(`Overrides should only be 2 elements long.`);
+        }
+
+        this._lastEdgeOverride =
+            lastEdgeOverride.length == 0 ? [] : lastEdgeOverride;
+
+        this.updateBar();
+    }
+    get lastEdgeOverride() {
+        return this._lastEdgeOverride;
     }
 }
 
