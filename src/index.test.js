@@ -53,6 +53,19 @@ describe("Progress Bar", function () {
             bar.charSplit("6");
             expect(bar.bar).to.eql("eeeeeeeee6ffffffffff");
         });
+        it("should update the bar, changing it's entire look.", function () {
+            bar.emptyChar = "O";
+            bar.fullChar = "@";
+            bar.lastEdgeOverride = [">", "}"];
+            bar.firstEdgeOverride = ["<", "{"];
+
+            expect(bar.bar).to.eql("{@@@@@@@@@OOOOOOOOO>");
+        });
+        it("should clear edge overrides.", function () {
+            bar.lastEdgeOverride = [];
+            bar.firstEdgeOverride = [];
+            expect(bar.bar).to.eql("@@@@@@@@@@OOOOOOOOOO");
+        });
 
         let bar2 = new ProgressBar(100, 4, "e", "f", ["<", "<"], [">", ">"]);
         it("should NOT split with the char, since there is a lastEdgeOverride and bar is 100%", function () {
